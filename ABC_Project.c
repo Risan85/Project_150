@@ -136,7 +136,7 @@ int main() {
         input();
         logic();
         if (PlayerScore >= 5 || ComputerScore >= 5) {
-            printf("Game Over! Player: %d\tComputer: %d\n", PlayerScore, ComputerScore);
+            printf("Game Over,Better luck next time! Player: %d\tComputer: %d\n", PlayerScore, ComputerScore);
             break;
         }
         Sleep(100);       ///  in each iteration of the game loop, controlling the speed of the game.
