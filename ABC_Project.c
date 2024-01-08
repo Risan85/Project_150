@@ -36,14 +36,14 @@ void DoNotBlink(_Bool showFlag) {
 void draw() {        /// draws the game board and other things like ball,paddle
     COORD coord = {0, 0};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);  ///to set the cursor position in the console window /// (GetStdHandle)to retrieve the standard output handle for the console
-    for (int i = 0; i < W + 2; i++)
-        printf("#");
+    for (int i = 0; i < W ; i++)
+        printf("¥");
     printf("\n");
 
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < W; j++) {
             if (j == 0 || j == W - 1)
-                printf("#");
+                printf("¥");
             else if (j == ball_X && i == ball_Y)
                 printf("o");
             else if (j == W - 2 && i >= ComputerY - 2 && i <= ComputerY + 2)
@@ -56,8 +56,8 @@ void draw() {        /// draws the game board and other things like ball,paddle
         printf("\n");
     }
 
-    for (int i = 0; i < W + 2; i++)
-        printf("#");
+    for (int i = 0; i < W; i++)
+        printf("¥");
     printf("\n");
     printf("Player: %d\tComputer: %d\n", PlayerScore, ComputerScore);
 }
