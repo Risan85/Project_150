@@ -105,11 +105,21 @@ void logic() {
     /// ballY> means ball is under the comp.paddle , compY is +++ to move down
     ///vice versa
 
-    ///#main
-    if (ball_Y > ComputerY)
-        ComputerY+=7;
-    else if (ball_Y < ComputerY)
-        ComputerY--;    ///   player paddle has a range but in this case we didnt give any range to the comp.paddle
+   static int moveDirection = 1; 
+    if (moveDirection == 1) {
+        if (ComputerY < H - 4) {
+            ComputerY++;
+        } else {
+            moveDirection = -1; 
+        }
+    } else {
+    
+        if (ComputerY > 3) {
+            ComputerY--;
+        } else {
+            moveDirection = 1;
+        }
+    }
 
 
         /// #2
