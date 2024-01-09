@@ -11,6 +11,7 @@ int PlayerY, ComputerY;
 int ball_Dir_X, ball_Dir_Y;
 int PlayerScore, ComputerScore;
 int GAMEOVER;
+int multiplayer = 0;
 
 void setup() {              ///Initializes game variables, placing the ball and paddles at the center, setting initial directions, and resetting scores
     GAMEOVER = 0;
@@ -59,7 +60,7 @@ void draw() {        /// draws the game board and other things like ball,paddle
     for (int i = 0; i < W; i++)
         printf("¥");
     printf("\n");
-    printf("Player: %d\tComputer: %d\n", PlayerScore, ComputerScore);
+    printf("Player: %d\tOpposition: %d\n", PlayerScore, ComputerScore);
 }
 
 void input() {
@@ -73,6 +74,8 @@ void input() {
             PlayerY++;
         else if (key == 'x')
             GAMEOVER = 1;
+         else if (key == 'm')
+            multiplayer = 1;
     }
 }
 
@@ -105,21 +108,32 @@ void logic() {
     /// ballY> means ball is under the comp.paddle , compY is +++ to move down
     ///vice versa
 
-   static int moveDirection = 1; 
+      if (multiplayer) {
+     if (GetAsyncKeyState(VK_UP) & 0x8000 && ComputerY > 3)
+            ComputerY--;
+        else if (GetAsyncKeyState(VK_DOWN) & 0x8000 && ComputerY < H - 4)
+            ComputerY++;
+    }
+
+    else
+    {
+           static int moveDirection = 1;
     if (moveDirection == 1) {
         if (ComputerY < H - 4) {
             ComputerY++;
         } else {
-            moveDirection = -1; 
+            moveDirection = -1;
         }
     } else {
-    
+
         if (ComputerY > 3) {
             ComputerY--;
         } else {
             moveDirection = 1;
         }
     }
+    }
+
 
 
         /// #2
@@ -141,12 +155,22 @@ else if (ballY < computerY)
 int main() {
     DoNotBlink(0);
     setup();
+    printf("Press 's'-->single player or 'm'-->multi \n");
+        while (1) {
+        char key = _getch();
+        if (key == 's' || key == 'm') {
+            if (key == 'm')
+                multiplayer = 1;
+            break;
+        }
+    }
+    
     while (1) {          /// Change the game loop condition to an infinite loop
         draw();
         input();
         logic();
         if (PlayerScore >= 10 || ComputerScore >= 10) {
-            printf("Game Over! Player: %d\tComputer: %d\n", PlayerScore, ComputerScore);
+            printf("Game Over! Player: %d\tOpposition: %d\n", PlayerScore, ComputerScore);
             break;
         }
         Sleep(100);       ///  in each iteration of the game loop, controlling the speed of the game.
