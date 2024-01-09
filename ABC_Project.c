@@ -109,9 +109,9 @@ void logic() {
     ///vice versa
 
       if (multiplayer) {
-     if (GetAsyncKeyState(VK_UP) & 0x8000 && ComputerY > 3)
+     if (GetAsyncKeyState(VK_UP)  && ComputerY > 3)
             ComputerY--;
-        else if (GetAsyncKeyState(VK_DOWN) & 0x8000 && ComputerY < H - 4)
+        else if (GetAsyncKeyState(VK_DOWN)  && ComputerY < H - 4)
             ComputerY++;
     }
 
