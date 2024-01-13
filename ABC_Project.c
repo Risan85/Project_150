@@ -37,6 +37,11 @@ void DoNotBlink(_Bool showFlag) {
 void draw() {        /// draws the game board and other things like ball,paddle
     COORD coord = {0, 0};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);  ///to set the cursor position in the console window /// (GetStdHandle)to retrieve the standard output handle for the console
+     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  SetConsoleTextAttribute(hConsole,
+     FOREGROUND_GREEN );
+
     for (int i = 0; i < W ; i++)
         printf("¥");
     printf("\n");
